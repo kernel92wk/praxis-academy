@@ -35,3 +35,5 @@ print(nilai[0])
 print("=========")
 print(contoh["key1"])
 print("=========")
+
+#belajar git
