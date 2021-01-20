@@ -1,1 +1,22 @@
-tes
+* Hello world
+root@kernel92:/#  echo "Hello World"
+Hello World
+root@kernel92:/home/kernel92/latihan# bash first.sh 
+Hello World
+
+* Echo Command
+root@kernel92:/home/kernel92/latihan# bash echo_example.sh 
+Printing text with newline
+Printing text without newline
+Removing 	 backslash 	 characters
+
+* Comments
+#!/bin/bash
+
+# Add two numeric value
+((sum=25+35))
+
+#Print the result
+echo $sum
+root@kernel92:/home/kernel92/latihan# bash comment_example.sh 
+60
