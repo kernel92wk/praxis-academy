@@ -1,0 +1,57 @@
+===> Grub merupakan perangkat lunak boot loader di Ubuntu atau bahasa sederhananya boot menu yang menampilkan semua sistem operasi yang terinstal pada komputer. Grub ini biasanya akan terhapus jika menginstal Windows karena tertimpa oleh aplikasi boot dari Windows. Boot loader dari Windows tidak bisa membaca Linux, tapi boot loader Linux bisa membaca semua sistem operasi.
+
+===> 1. Memanggil Primary Boot-Loader
+Primary boot-loader berisi program dengan ukuran lebih kecil dari 512 bytes karena diletakan pada MBR yang hanya berukuran sebesar 512 bytes, program ini kemudian memanggil secondary boot-loader.
+
+===> 2. Memanggil Secondary Boot-Loader
+Seondary boot-loader kemudian membawa kita ke menu pilihan sistem operasi apa yang akan kita jalankan, GRUB menyediakan dua menu pilihan utama, yaitu pilihan menu sistem operasi dan mode boot-loader command. GRUB mengakses file konfigurasi,   /boot/grub/grub.conf, setiap kali proses booting dilakukan
+
+===> 3. Memanggil Sistem Operasi Pada Posisi Partisi Tertentu
+Dalam memanggil sistem operasi, GRUB mendapat intruksi tertentu untuk memanggil sistem operasi tersebut. Intruksi ini bisa kita definisikan melalui konfigurasi GRUB, atau kita ketikan secara manual pada mode boot-loader command.
+
+===> Direktori /dev/ secara tradisional menyimpan berkas yang disebut berkas “khusus”, dimaksudkan untuk merepresentasikan peripheral sistem.
+
+===> File konfigurasi utama untuk mengubah pengaturan tampilan menu dinamakan grub dan secara bawaan terletak di direktori /etc/default.
+
+===> Terdapat beberapa file untuk mengatur konfigurasi menu – /etc/default/grub yang telah disebutkan di atas, serta seluruh file yang ada di dalam direktori /etc/grub.d/.
+
+===> Penomoran partisi telah diubah. Partisi pertama bukan lagi bernomor 0, melainkan 1. Device/drive pertama masih bernama still hd0 secara bawaan (tak berubah). Penomoran ini bisa diubah (jika diperlukan) pada file device.map dalam direktori /boot/grub. 
+
+=====> STRUKTUR FILE <=====
+GRUB menyajikan direktori dan hirarki file yang telah direvisi total. Direktori utama GRUB folders meliputi /etc/grub.d, yang memuat script utama GRUB 2, dan /boot/grub, yang memuat modul-modul GRUB serta file menu (grub.cfg). Kustomisasi pengguna normalnya dilakukan pada file /etc/default/grub.
+
+=====> KONFIGURASI GRUB <=====
+Perubahan konfigurasi normalnya dilakukan pada file /etc/default/grub serta pada script kustom di /etc/grub.d. Segala perubahan belum akan diterapkan pada menu GRUB sebelum pengguna mengeksekusi perintah update-grub (sebagai root). Perintah ini akan menjalankan script konfigurasi GRUB dan memutakhirkan file /boot/grub/grub.cfg.
+
+=====> TAMPILAN BOOT <=====
+GRUB termuat sebelum sistem operasi manapun. Komponen-komponen modularnya dimuat sesuai kepentingan pengguna. Kinerja tampilan boot secara umum dapat ditentukan melalui pengaturan file /etc/default/grub. Silakan baca ulang seksi “Konfigurasi GRUB 2” di atas untuk panduan entri dan pemformatan tertentu.
+
+=====> TAMPILAN BERBATAS WAKTU <=====
+..Menu GRUB akan ditampilkan dalam jangka waktu beberapa detik. Entri default akan di-highlight dan opsi lainnya bisa dipilih oleh pengguna hingga berakhirnya timeout. Timeout bawaan berjangka 2 detik. Penghitung waktu akan berjalan terus sampai ada tuts yang ditekan atau entri yang di-highlight dipilih dengan mengklik ENTER.
+..Jika pengguna tidak melakukan input apapun, GRUB akan menjalankan boot ke entri default saat timeout berakhir.
+..Jika ada tuts yang ditekan sebelum timeout, maka penghitung waktu akan berhenti dan pengguna harus melakukan seleksi secara manual.
+..Entri default ditentukan dengan pengaturan GRUB_DEFAULT= dalam file /etc/default/grub; “menuentry” pertama memiliki nilai “0”.
+
+=====> HIDDEN (TERSEMBUNYI) <=====
+1. Operasi Menu Tersembunyi Normal Diaktifkan:
+   Entri menu tidak ditampilkan. Splash screen, jika dikonfigurasikan, akan ditampilkan.
+   Jangka waktu layar kosong namun tersedia untuk display ditentukan dengan pengaturan di dalam file /etc/default/grub    (GRUB_HIDDEN_TIMEOUT)
+   GRUB dapat menampilkan penghitung waktu mundur untuk menyajikan umpan balik visual atas jangka waktu yang tersisa   sampai entri default dieksekusi. Pengaturan timeout berada di dalam file /etc/default/grub (GRUB_HIDDEN_TIMEOUT_QUIET)
+   Pengguna dapat menampilkan menu dengan mengklik tuts manapun.
+   Sesudah menu ditampilkan, penghitung mundur GRUB_TIMEOUT mulai berjalan. Klik pada tuts manapun akan menghentikan  penghitung mundur.
+   Jika tak ada tuts yang diklik pada akhir timeout, entri default yang ditentukan oleh pengaturan dalam file /etc/default/grub akan dieksekusi.
+2. Operasi Menu Tersembunyi Abnormal (tidak sesuai dengan konfigurasi):
+   Pengguna bisa menampilkan menu dengan salah satu atau beberapa cara berikut:
+   Menahan tuts SHIFT pada awal proses boot hingga menu ditampilkan.
+   GRUB mencari sinyal tuts SHIFT yang ditekan saat proses boot berjalan. Jika tuts ditekan atau GRUB tak bisa menentukan status tuts tersebut, menu otomatis ditampilkan.
+   Mengklik tuts ESC dalam jangka 3 detik saat GRUB berjalan.
+   
+=====> SAVED (TERSIMPAN) <=====
+..Menyimpan suatu OS bisa dilakukan dengan menjalankan sudo grub-set-default jika GRUB_DEFAULT=saved diatur dalam /etc/default/grub. Ini juga bisa disimpan jika GRUB_SAVEDEFAULT=true juga diatur dalam /etc/default/grub. Dalam kasus ini, OS default akan tetap bertahan hingga sebuah OS baru diseleksi secara manual pada menu GRUB atau perintah grub-set-default dieksekusi.
+
+=====> PROTEKSI PASSWORD <=====
+..GRUB mampu melakukan penyuntingan menu, akses ke terminal GRUB, serta menuentries tertentu dengan proteksi password. Hal ini juga akan membatasi akses ke entri-entri tertentu bagi pengguna tertentu, dan mampu mengenkripsi password teks murni untuk keamanan yang lebih ketat.
+
+=====> DISPLAY <=====
+..GRUB bisa melakukan lebih dari sekedar menu hitam-putih sederhana. Menu bawaannya bisa dikustomisasi oleh pengguna untuk menampilkan menu yang lebih menarik secara visual dengan perubahan pada warna font, latar belakang, dan resolusi.
+

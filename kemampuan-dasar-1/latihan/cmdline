@@ -1,0 +1,115 @@
+==1=> Listing files (ls)
+root@kernel92:/# ls
+bin   cdrom  etc   lib    lib64   lost+found  mnt  proc  run   snap  sys  usr
+boot  dev    home  lib32  libx32  media       opt  root  sbin  srv   tmp  var
+
+==2=> ls -R' to shows all the files not only in directories but also subdirectories 
+root@kernel92:/# ls -R
+/boot/efi:
+ EFI  'System Volume Information'
+
+./boot/efi/EFI:
+Boot  Microsoft  OEM  ubuntu
+
+./boot/efi/EFI/Boot:
+bootx64.efi  fbx64.efi  mmx64.efi
+
+==3=> Listing Hidden Files
+root@kernel92:/# ls -a
+.   bin   cdrom  etc   lib    lib64   lost+found  mnt  proc  run   snap  sys  usr
+..  boot  dev    home  lib32  libx32  media       opt  root  sbin  srv   tmp  var
+
+==4=> Creating & Viewing Files
+root@kernel92:/home/kernel92# cat > sample1
+This is sample1
+
+==5=> Deleting Files
+root@kernel92:/home/kernel92# ls
+Desktop  Documents  Downloads  Music  Pictures  Public  sample1  snap  Templates  Videos
+root@kernel92:/home/kernel92# rm sample1 
+root@kernel92:/home/kernel92# ls
+Desktop  Documents  Downloads  Music  Pictures  Public  snap  Templates  Videos
+
+==6=> Moving and Re-naming files
+root@kernel92:/home/kernel92# ls
+Desktop  Documents  Downloads  Music  Pictures  Public  sample2  snap  Templates  Videos 
+root@kernel92:/home/kernel92# mv sample2 /home/kernel92/Downloads/
+root@kernel92:/home/kernel92# ls
+Desktop  Documents  Downloads  Music  Pictures  Public  snap  Templates  Videos
+root@kernel92:/home/kernel92# 
+
+==7=> Directory Manipulations
+root@kernel92:/home/kernel92# mkdir mydirectory
+root@kernel92:/home/kernel92# ls
+Desktop  Documents  Downloads  Music  mydirectory  Pictures  Public  snap  Templates  Videos
+root@kernel92:/home/kernel92# 
+
+==8=> Removing Directories
+root@kernel92:/home/kernel92# rmdir mydirectory/
+root@kernel92:/home/kernel92# ls
+Desktop  Documents  Downloads  Music  Pictures  Public  snap  Templates  Videos
+
+==9=> Renaming Directory
+root@kernel92:/home/kernel92# ls
+Desktop  Documents  Downloads  Music  mydirectory  Pictures  Public  snap  Templates  Videos
+root@kernel92:/home/kernel92# mv mydirectory mydirectory2
+root@kernel92:/home/kernel92# ls
+Desktop  Documents  Downloads  Music  mydirectory2  Pictures  Public  snap  Templates  Videos
+
+==10=> Other Important Commands
+root@kernel92:/home/kernel92# man man
+
+[3]+  Stopped                 man man
+root@kernel92:/home/kernel92# 
+
+=================================================================================================
+
+
+===> The cd command changes the current directory in Linux
+root@kernel92:/# cd /home/kernel92/Downloads/
+root@kernel92:/home/kernel92/Downloads# ls
+'ANNETH - MUNGKIN HARI INI ESOK ATAU NANTI (OFFICIAL MUSIC VIDEO).mp3'
+ git-2.30.0
+ git-2.30.0.tar.gz
+ google-chrome-stable_current_amd64.deb
+ sample2
+ whatsapp-webapp_1.0_all.deb
+
+===> CHMOD merupakan perintah di Linux yang namanya berasal dari kata change mode (ubah mode) 
+
+----SEBELUM DI RUBAH----
+
+root@kernel92:/home/kernel92/Downloads# ll
+total 92292
+drwxr-xr-x  3 kernel92 kernel92     4096 Jan 19 21:49  ./
+drwxr-xr-x 20 kernel92 kernel92     4096 Jan 19 21:54  ../
+-rw-rw-r--  1 kernel92 kernel92  6747879 Jan 19 20:42 'ANNETH - MUNGKIN HARI INI ESOK ATAU NANTI (OFFICIAL MUSIC VIDEO).mp3'
+drwxrwxr-x 27 root     root        20480 Jan 18 12:18  git-2.30.0/
+-rw-rw-r--  1 kernel92 kernel92  9877404 Jan 18 11:59  git-2.30.0.tar.gz
+-r--------  1 kernel92 kernel92 77271596 Jan 18 10:56  google-chrome-stable_current_amd64.deb
+-RW-R--R--  1 ROOT     ROOT           16 JAN 19 21:48  SAMPLE2 <<<<<---------
+-rw-rw-r--  1 kernel92 kernel92   559404 Jan 19 08:03  whatsapp-webapp_1.0_all.deb
+
+----SETELAH DI RUBAH----
+
+root@kernel92:/home/kernel92/Downloads# chmod 664 sample2 
+root@kernel92:/home/kernel92/Downloads# ll
+total 92292
+drwxr-xr-x  3 kernel92 kernel92     4096 Jan 19 21:49  ./
+drwxr-xr-x 20 kernel92 kernel92     4096 Jan 19 21:54  ../
+-rw-rw-r--  1 kernel92 kernel92  6747879 Jan 19 20:42 'ANNETH - MUNGKIN HARI INI ESOK ATAU NANTI (OFFICIAL MUSIC VIDEO).mp3'
+drwxrwxr-x 27 root     root        20480 Jan 18 12:18  git-2.30.0/
+-rw-rw-r--  1 kernel92 kernel92  9877404 Jan 18 11:59  git-2.30.0.tar.gz
+-r--------  1 kernel92 kernel92 77271596 Jan 18 10:56  google-chrome-stable_current_amd64.deb
+-RW-RW-R--  1 ROOT     ROOT           16 JAN 19 21:48  SAMPLE2 <<<<<-------------
+-rw-rw-r--  1 kernel92 kernel92   559404 Jan 19 08:03  whatsapp-webapp_1.0_all.deb
+
+
+===> CHOWN merupakan perintah di Linux yang berasal dari singkatan dari change owner (ubah mode)
+root@kernel92:/home/kernel92/Downloads# ll
+-rw-rw-r--  1 root     root           16 Jan 19 21:48  sample2
+root@kernel92:/home/kernel92/Downloads# chown kernel92:kernel92 sample2
+-rw-rw-r--  1 kernel92 kernel92       16 Jan 19 21:48  sample2
+
+
+

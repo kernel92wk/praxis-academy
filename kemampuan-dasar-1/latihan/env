@@ -1,0 +1,15 @@
+1. Display Manager     : systemctl status display-manager
+			● gdm.service - GNOME Display Manager
+			GNOME adalah lingkungan desktop dan antarmuka grafik pengguna yang berjalan di atas sistem operasi
+
+2. Windows Manager     : wmctrl -m
+			● GNOME Shell
+
+3. Desktop environment : dpkg -l ubuntu-desktop
+			● GNOME Ubuntu-desktop 1.450.2 
+			Desktop environment secara umum bisa digambarkan sebagai GUI atau Graphical User Interface dari 				sistem operasi. Pada sistem operasi Linux, desktop environment ini tidak sekedar GUI saja akan 				tetapi mencakup juga program-program dan tools yang digunakan dalam sistem operasi tersebut
+
+4. Shell	      : sudo gnome-shell --version
+			● GNOME Shell 3.36.4
+			
+secara umum bisa di panggil dengan command "env" pada shell
